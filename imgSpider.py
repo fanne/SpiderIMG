@@ -4,6 +4,11 @@
 __Date__ = "2016-02-24 10:05"
 __Author__ = 'eyu Fanne'
 
+##爬取知乎https://www.zhihu.com/question/39863528下包含链接的所有图片
+##multiprocessing在python2.X中需要实例后再使用
+
+
+
 from bs4 import BeautifulSoup
 import configparser
 import requests,re,time,os,urllib
@@ -72,8 +77,6 @@ class SpiderWork:
         img_jpg = img_soup.find_all("img",class_="origin_image zh-lightbox-thumb lazy")
         for jpg_i in img_jpg:
             jpg_file = jpg_i.get('data-actualsrc')
-            print (jpg_file)
-            print (type(jpg_file))
             jpg_i = jpg_file.split('/')[-1]
             if not os.path.exists(self.img_dir):
                 os.mkdir(self.img_dir)
@@ -81,22 +84,17 @@ class SpiderWork:
             print (jpg_j)
             urllib.urlretrieve(jpg_file,jpg_j)
 
-            # img_file = self.img_dir+jpg_file
-            # urllib.request.urlretrieve(jpg_file,img_file)
-            # img_file = urllib.urlopen(jpg_file)
-            # img_data = img_file.read()
-            # f = open(self.img_dir,'wb')
-            # f.write(img_data)
-            # f.close()
 
 
 def main():
     spiderMain = SpiderWork('config.ini')
     spiderMain.startLogin()
-    pool = multiprocessing.Pool(processes=10)
-    print (spiderMain.spiderNow())
+
+    pool = multiprocessing.Pool(processes=8)
     for jpg in spiderMain.spiderNow():
-        pool.apply_async(spiderMain.getImg,(jpg,))
+        #pool.apply_async(spiderMain.getImg,(jpg,))  不直接传入类实例的方法，用另一个函数包装一下，将类的实例作为参数传入即可
+        spiderThread = spiderMain.getImg(jpg)
+        pool.apply_async(spiderThread,(jpg,))
     pool.close()
     pool.join()
 
