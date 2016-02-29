@@ -16,6 +16,7 @@ import multiprocessing
 from requests.packages.urllib3.exceptions import InsecureRequestWarning,InsecurePlatformWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 requests.packages.urllib3.disable_warnings(InsecurePlatformWarning)
+import zhihuLogin
 
 # class SpiderWork:
 #     def __init__(self,configfile):
@@ -59,30 +60,30 @@ requests.packages.urllib3.disable_warnings(InsecurePlatformWarning)
 #             exit(1)
 #
 #
-#     def spiderNow(self):
-#         global answer_url_list
-#         answer_url_list = []
-#         answer_text = login_session.get(self.img_url,headers=self.headers,verify=False).text
-#         answer_soup = BeautifulSoup(answer_text,'lxml')
-#         answer_url = answer_soup.find_all("a",href=re.compile("answer"),class_="internal")
-#         for answer_i in answer_url:
-#             #print answer_i.get('href')
-#             answer_url_list.append(answer_i.get('href'))
-#         #print  answer_url_list
-#         return answer_url_list
-#
-#     def getImg(self,img_url_i):
-#         img_text = login_session.get(img_url_i,headers=self.headers,verify=False).text
-#         img_soup = BeautifulSoup(img_text,'lxml')
-#         img_jpg = img_soup.find_all("img",class_="origin_image zh-lightbox-thumb lazy")
-#         for jpg_i in img_jpg:
-#             jpg_file = jpg_i.get('data-actualsrc')
-#             jpg_i = jpg_file.split('/')[-1]
-#             if not os.path.exists(self.img_dir):
-#                 os.mkdir(self.img_dir)
-#             jpg_j = self.img_dir+'/'+jpg_i
-#             print (jpg_j)
-#             urllib.urlretrieve(jpg_file,jpg_j)
+    # def spiderNow(self):
+    #     global answer_url_list
+    #     answer_url_list = []
+    #     answer_text = login_session.get(self.img_url,headers=self.headers,verify=False).text
+    #     answer_soup = BeautifulSoup(answer_text,'lxml')
+    #     answer_url = answer_soup.find_all("a",href=re.compile("answer"),class_="internal")
+    #     for answer_i in answer_url:
+    #         #print answer_i.get('href')
+    #         answer_url_list.append(answer_i.get('href'))
+    #     #print  answer_url_list
+    #     return answer_url_list
+    #
+    # def getImg(self,img_url_i):
+    #     img_text = login_session.get(img_url_i,headers=self.headers,verify=False).text
+    #     img_soup = BeautifulSoup(img_text,'lxml')
+    #     img_jpg = img_soup.find_all("img",class_="origin_image zh-lightbox-thumb lazy")
+    #     for jpg_i in img_jpg:
+    #         jpg_file = jpg_i.get('data-actualsrc')
+    #         jpg_i = jpg_file.split('/')[-1]
+    #         if not os.path.exists(self.img_dir):
+    #             os.mkdir(self.img_dir)
+    #         jpg_j = self.img_dir+'/'+jpg_i
+    #         print (jpg_j)
+    #         urllib.urlretrieve(jpg_file,jpg_j)
 #
 #
 #
@@ -111,6 +112,7 @@ requests.packages.urllib3.disable_warnings(InsecurePlatformWarning)
 #     # for jpg in answer_url_list:
 #     #     loginNow.getImg(jpg)
 #     #loginNow.getImg('https://www.zhihu.com/question/27936753/answer/81327730')
+
 
 
 
