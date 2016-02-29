@@ -19,8 +19,7 @@ class AnswerFun(object):
         self.answer_url = config.get(configname,'question_url')
 
     def getAnswer(self):
-        #answer_text = zhihuLogin.login_session.post(self.answer_url,headers=zhihuLogin.LoginFun.headers,verify=False).text
-        answer_text = zhihuLogin.LoginFun.startLogin.login_session.post(self.answer_url,headers=zhihuLogin.LoginFun.headers,verify=False).text
+        answer_text = zhihuLogin.login_session.post(self.answer_url,headers=zhihuLogin.LoginFun.headers,verify=False).text
         answer_soup = BeautifulSoup(answer_text,'lxml')
         print answer_soup
 
